@@ -1,6 +1,7 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <stdio.h>
+#include<iostream>
 #define DEFAULT_PORT "51717"
 #define DEFAULT_BUFLEN 32
 
@@ -24,7 +25,7 @@ int main() {
 	hints.ai_family = AF_UNSPEC;
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_protocol = IPPROTO_TCP;
-
+	SOCKADDR_IN  ServerAddr;
 
 	// Initialize Winsock
 	iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
@@ -33,21 +34,22 @@ int main() {
 		system("pause");
 		return 1;
 	}
-
-	// Resolve the server address and port
-	iResult = getaddrinfo("raspberrypiServer", DEFAULT_PORT, &hints, &result);
-	if (iResult != 0) {
-		printf("getaddrinfo failed: %d\n", iResult);
-		system("pause");
-		WSACleanup();
-		return 1;
+	// IPv4
+	ServerAddr.sin_family = AF_INET;
+	// Port no.
+	ServerAddr.sin_port = htons(51717);
+	// The IP address
+	int serverNetworkIpAdress = 0;
+	if(InetPton(AF_INET, "192.168.1.11", &serverNetworkIpAdress)==0)
+	{
+		std::cout << "error on using IntPton" << std::endl;
+		return -1;
 	}
+	ServerAddr.sin_addr.s_addr = serverNetworkIpAdress;
 
-	// Attempt to connect to the first address returned by the call to getaddrinfo
-	ptr = result;
+	
 	// Create a SOCKET for connecting to server
-	ConnectSocket = socket(result->ai_family, result->ai_socktype,
-		result->ai_protocol);
+	ConnectSocket = socket(AF_INET, SOCK_STREAM,0);
 
 	if (ConnectSocket == INVALID_SOCKET) {
 		printf("Error at socket(): %d\n", WSAGetLastError());
@@ -56,7 +58,7 @@ int main() {
 		return 1;
 	}
 
-	iResult = connect(ConnectSocket, ptr->ai_addr, (int)ptr->ai_addrlen);
+	iResult = connect(ConnectSocket, (SOCKADDR *)&ServerAddr, sizeof(ServerAddr));
 	if (iResult == SOCKET_ERROR) {
 		closesocket(ConnectSocket);
 		ConnectSocket = INVALID_SOCKET;
