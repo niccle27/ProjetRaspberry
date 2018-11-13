@@ -2,33 +2,35 @@
 #include <ws2tcpip.h>
 #include <stdio.h>
 #include<iostream>
+#include "CommunicationManager.h"
+
 #define DEFAULT_PORT "51717"
 #define DEFAULT_BUFLEN 32
 
 #pragma comment(lib, "Ws2_32.lib")
 
 int main() {
-
-	int iResult;
-	WSADATA wsaData;
+	CommunicationManager *toServer = new CommunicationManager();
+	toServer->InitialiseWinsock();
+	toServer->InitialiseServerAddr(AF_INET,51717, "192.168.1.11");
+	toServer->CreateSocket();
+	toServer->ConnectSocket();
+	toServer->Send("petit test de connection en objet");
+	system("pause");
+	return 0;
+	/*WSADATA wsaData;
 
 	struct addrinfo *result = NULL,
-		*ptr = NULL,
-		hints;
+		*ptr = NULL;
 
 	SOCKET ConnectSocket = INVALID_SOCKET;
 
 	char *sendbuf = (char*)"this is a test";
 	char recvbuf[DEFAULT_BUFLEN];
-
-	ZeroMemory(&hints, sizeof(hints));
-	hints.ai_family = AF_UNSPEC;
-	hints.ai_socktype = SOCK_STREAM;
-	hints.ai_protocol = IPPROTO_TCP;
 	SOCKADDR_IN  ServerAddr;
 
 	// Initialize Winsock
-	iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
+	int iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
 	if (iResult != 0) {
 		printf("WSAStartup failed: %d\n", iResult);
 		system("pause");
@@ -63,13 +65,6 @@ int main() {
 		closesocket(ConnectSocket);
 		ConnectSocket = INVALID_SOCKET;
 	}
-
-
-	// Should really try the next address returned by getaddrinfo
-	// if the connect call failed
-	// But for this simple example we just free the resources
-	// returned by getaddrinfo and print an error message
-
 	freeaddrinfo(result);
 
 	if (ConnectSocket == INVALID_SOCKET) {
@@ -107,5 +102,5 @@ int main() {
 			printf("recv failed: %d\n", WSAGetLastError());
 	} while (iResult > 0);
 
-	return 0;
+	return 0;*/
 }

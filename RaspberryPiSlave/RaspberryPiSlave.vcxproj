@@ -66,10 +66,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="RaspberryPiSlave.cpp" />
+    <ClCompile Include="Raspberry.cpp" />
+    <ClCompile Include="CommunicationManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RaspberryPiSlave.h" />
+    <ClInclude Include="Raspberry.h" />
+    <ClInclude Include="CommunicationManager.h" />
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

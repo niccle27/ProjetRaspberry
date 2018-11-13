@@ -1,2 +1,6 @@
-﻿  main.cpp
+﻿  CommunicationManager.cpp
+  main.cpp
+  Source.cpp
+  Generating Code...
+c:\users\cleme\source\repos\projetraspberry\wincomputerclient\communicationmanager.cpp(43): warning C4715: 'CommunicationManager::CreateSocket': not all control paths return a value
   WinComputerClient.vcxproj -> C:\Users\cleme\source\repos\ProjetRaspberry\x64\Debug\WinComputerClient.exe

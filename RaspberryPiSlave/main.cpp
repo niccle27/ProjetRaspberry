@@ -1,4 +1,4 @@
-#include "RaspberryPiSlave.h"
+#include "Raspberry.h"
 #include <wiringPi.h>
 
 // LED Pin - wiringPi pin 0 is BCM_GPIO 17.
@@ -11,15 +11,15 @@
 int main(void)
 {
 	wiringPiSetupSys();
-	RaspberryPiSlave *raspberry = new RaspberryPiSlave();
-	raspberry->StartListeningForConnection();
+	std::cout << "version mise a jour 3" << std::endl;
+	Raspberry *raspberry = new Raspberry();
+	raspberry->StartListeningForComputerConnection();
 	while (true)
 	{
-		char buffer[DEFAULT_BUFLEN];
-		raspberry->ReadData();
+		const char *buffer = raspberry->getReadingBufferComputerConnection().c_str();
 		if (buffer != nullptr)
 		{
-			std::cout << raspberry->ReadData() << std::endl;
+			std::cout << raspberry->getReadingBufferComputerConnection() << std::endl;
 		}
 	}
 }
