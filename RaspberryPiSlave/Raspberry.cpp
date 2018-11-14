@@ -1,5 +1,5 @@
 #include "Raspberry.h"
-
+#include <string.h>
 
 int Raspberry::StartListeningForComputerConnection()
 {
@@ -8,12 +8,17 @@ int Raspberry::StartListeningForComputerConnection()
 
 std::string Raspberry::getReadingBufferComputerConnection()
 {
-	return std::string(communicationToComputer->ReadData());
+	string temp;
+	char test[DEFAULT_BUFLEN];
+	cout << "test" << endl;
+	int result = communicationToComputer->ReadData(test);
+	temp.assign(test, strlen(test));
+	return temp;
 }
 
-void Raspberry::SendData(char data[])
+int Raspberry::SendReadingBufferComputerConnection(string bufferToSend)
 {
-	communicationToComputer->SendData(data);
+	return communicationToComputer->SendData(bufferToSend);
 }
 
 Raspberry::Raspberry()
@@ -24,4 +29,5 @@ Raspberry::Raspberry()
 
 Raspberry::~Raspberry()
 {
+	delete communicationToComputer;
 }

@@ -1,11 +1,13 @@
 #pragma once
-#define DEFAULT_BUFLEN 32
+
 #include <winsock2.h>
 #include <string>
 #include <cstdio>
 #include <ostream>
 #include <iostream>
 #include <ws2tcpip.h>
+
+#define DEFAULT_BUFLEN 32
 
 class CommunicationManager
 {
@@ -20,7 +22,7 @@ public:
 	int CreateSocket();
 	int ConnectSocket();
 	int Send(std::string toBeSent);
-	int CloseSendingConnection();
+	int CloseSocketConnection();
 	int WaitAndReceive();
 
 

@@ -16,6 +16,8 @@ int main() {
 	toServer->CreateSocket();
 	toServer->ConnectSocket();
 	toServer->Send("petit test de connection en objet");
+	toServer->CloseSocketConnection();
+	delete toServer;
 	system("pause");
 	return 0;
 	/*WSADATA wsaData;

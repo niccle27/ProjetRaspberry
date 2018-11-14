@@ -1,6 +1,10 @@
 #pragma once
 #include "CommunicationManager.h"
-#include "string"
+//#include <string.h>
+
+#define DEFAULT_BUFLEN 40
+
+using namespace std;
 class Raspberry
 {
 private:
@@ -8,7 +12,7 @@ private:
 public:
 	int StartListeningForComputerConnection();
 	std::string getReadingBufferComputerConnection();
-	void SendData(char data[]);
+	int SendReadingBufferComputerConnection(string bufferToSend);
 public:
 	Raspberry();
 	~Raspberry();

@@ -1,15 +1,13 @@
 #pragma once
 #include <wiringPi.h>
-#include <stdio.h>
 #include <iostream>
 #include <sys/types.h> 
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
-#include <string.h>
-#include <stdlib.h>
 #include <unistd.h>
-#define DEFAULT_BUFLEN 32
+#include <string>
+using namespace std;
 #define PORT 51717
 class CommunicationManager
 {
@@ -19,8 +17,8 @@ public:
 	~CommunicationManager();
 	int StartListeningForConnection();
 //private:
-	void SendData(char data[]);
-	char* ReadData();
+	int SendData(string toBeSent);
+	int ReadData(char* bufferReceived);
 	
 	//static method
 public:
@@ -35,7 +33,7 @@ private:
 	int port = PORT;
 	struct sockaddr_in serv_addr;
 	struct sockaddr_in cli_addr;;
-	char buffer[DEFAULT_BUFLEN];
+	//char buffer[DEFAULT_BUFLEN];
 
 };
 

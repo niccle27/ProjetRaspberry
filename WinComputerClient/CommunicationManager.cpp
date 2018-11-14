@@ -38,13 +38,14 @@ int CommunicationManager::CreateSocket()
 		printf("Error at socket(): %d\n", WSAGetLastError());
 		//freeaddrinfo(result);
 		WSACleanup();//use to terminate the use of the WS2_32.dll
-		return 1;
+		return 0;
 	}
+	return 1;
 }
 
 int CommunicationManager::ConnectSocket()
 {
-	int iResult = connect(mSocket, (SOCKADDR *)&ServerAddr, sizeof(ServerAddr));
+	int iResult = connect(mSocket, reinterpret_cast<SOCKADDR *>(&ServerAddr), sizeof(ServerAddr));
 	if (iResult == SOCKET_ERROR) {
 		closesocket(mSocket);
 		mSocket = INVALID_SOCKET;
@@ -68,9 +69,9 @@ int CommunicationManager::Send(std::string toBeSent)
 	return 1;
 }
 
-int CommunicationManager::CloseSendingConnection()
+int CommunicationManager::CloseSocketConnection()
 {
-	int iResult = shutdown(mSocket, SD_SEND);
+	int iResult = shutdown(mSocket, SD_BOTH);
 	if (iResult == SOCKET_ERROR) {
 		printf("shutdown failed: %d\n", WSAGetLastError());
 		closesocket(mSocket);

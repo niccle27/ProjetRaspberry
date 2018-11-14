@@ -1,6 +1,6 @@
 #include "CommunicationManager.h"
-
-
+#include <string.h>
+using namespace std;
 
 CommunicationManager::CommunicationManager()
 {
@@ -26,42 +26,45 @@ void CommunicationManager::Error(char* msg)
 	exit(1);
 }
 
-void CommunicationManager::SendData(char data[])
+int CommunicationManager::SendData(string toBeSent)
 {
+	char *sendbuf = (char*)toBeSent.c_str();
 	if (int socket = NULL)
 	{
 		std::cerr << "Socket is null, failed to send data" << std::endl;
-		return;
+		return 0;
 	}
 	int n;
-	char buffer[DEFAULT_BUFLEN];
-	strncpy(buffer, data, strlen(data));
-	if ((n = write(socketStream, buffer, strlen(buffer))) < 0)
+	/*char buffer[DEFAULT_BUFLEN];
+	strncpy(buffer, data, strlen(data));*/
+	if ((n = write(socketStream, sendbuf, strlen(sendbuf))) < 0)
+	{
 		Error(const_cast<char *>("ERROR writing to socket"));
+		return 0;
+	}
 	//buffer[n] = '\0';
+	return n;
 }
 
-char* CommunicationManager::ReadData()
+int CommunicationManager::ReadData(char bufferReceived[] )
 {
-	if (int socket = NULL)
-	{
+	if (socketStream == NULL){
 		std::cerr << "Socket is null, failed to send data" << std::endl;
-		return nullptr;
+		return 0;
 	}
-	char buffer[DEFAULT_BUFLEN];
-	int n=read(socketStream, buffer, DEFAULT_BUFLEN - 1);
+	int n=read(socketStream, bufferReceived, 40);
 	if (n < 0)
 	{
 		Error(const_cast<char *>("ERROR reading from socket"));
-		return nullptr;
+		return 0;
 	}
-
-	else if (n == 0) return nullptr;
+	else if (n == 0) return 0;
 	else
 	{
-		buffer[n] = '\0';
-		std::cout << buffer << std::endl;
-		return buffer;
+		//dataReceived
+		//buffer[n] = '\0';
+		std::cout << bufferReceived << std::endl;
+		return 1;
 	}
 
 }
