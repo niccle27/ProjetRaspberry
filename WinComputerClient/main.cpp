@@ -13,7 +13,7 @@ using namespace std;
 #pragma comment(lib, "Ws2_32.lib")
 
 int main() {
-	cout << "mise a jour 2" << endl;
+	cout << "mise a jour 3" << endl;
 	CommunicationManager *toServer = new CommunicationManager();
 	toServer->InitialiseWinsock();
 	toServer->InitialiseServerAddr(AF_INET,51717, "192.168.1.11");
@@ -24,7 +24,8 @@ int main() {
 	int result = toServer->Receive(bufferReceived);
 	if (result > 0)
 	{
-		cout << bufferReceived << endl;
+		cout <<"received: "<< bufferReceived << endl;
+		toServer->Send("bien recu");
 	}
 	toServer->CloseSocketConnection();
 	delete toServer;

@@ -9,6 +9,7 @@
 #include <string>
 using namespace std;
 #define PORT 51717
+#define DEFAULT_BUFLEN 32
 class CommunicationManager
 {
 	//method
@@ -18,7 +19,7 @@ public:
 	int StartListeningForConnection();
 //private:
 	int SendData(string toBeSent);
-	int ReadData(char* bufferReceived);
+	int ReadData(string &buffer);
 	
 	//static method
 public:

@@ -19,6 +19,7 @@ public:
 	int InitialiseWinsock();
 	int InitialiseServerAddr(int domain, int port, std::string ipAdress);
 	int CreateSocket();
+	int CreateNonBlockingSocket();
 	int ConnectSocket();
 	int Send(std::string toBeSent);
 	int CloseSocketConnection();

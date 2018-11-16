@@ -66,11 +66,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Raspberry.cpp" />
     <ClCompile Include="CommunicationManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Raspberry.h" />
     <ClInclude Include="CommunicationManager.h" />
   </ItemGroup>
   <ItemDefinitionGroup />

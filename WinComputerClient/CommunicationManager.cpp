@@ -43,6 +43,20 @@ int CommunicationManager::CreateSocket()
 	return 1;
 }
 
+int CommunicationManager::CreateNonBlockingSocket()
+{
+	if(CreateSocket()==0)return 0;
+	u_long mode = 1;//disable blocking
+	int iResult = ioctlsocket(mSocket, FIONBIO,&mode);
+	if (iResult != NO_ERROR)
+	{
+		printf("ioctlsocket failed with error: %ld\n", iResult);
+		return 0;
+	}
+	return 1;
+
+}
+
 int CommunicationManager::ConnectSocket()
 {
 	int iResult = connect(mSocket, reinterpret_cast<SOCKADDR *>(&ServerAddr), sizeof(ServerAddr));
@@ -56,6 +70,7 @@ int CommunicationManager::ConnectSocket()
 
 int CommunicationManager::Send(std::string toBeSent)
 {
+	toBeSent.push_back('\0');
 	char *sendbuf = (char*)toBeSent.c_str();
 	// Send an initial buffer
 	int iResult = send(mSocket, sendbuf, (int)strlen(sendbuf), 0);

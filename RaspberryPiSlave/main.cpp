@@ -1,4 +1,4 @@
-#include "Raspberry.h"
+#include "CommunicationManager.h"
 #include <wiringPi.h>
 
 // LED Pin - wiringPi pin 0 is BCM_GPIO 17.
@@ -11,9 +11,17 @@
 int main(void)
 {
 	wiringPiSetupSys();
-	std::cout << "version mise a jour 7" << std::endl;
-	Raspberry *raspberry = new Raspberry();
+	std::cout << "version mise a jour 10" << std::endl;
+	CommunicationManager *toComputer = new CommunicationManager();
+	toComputer->StartListeningForConnection();
+	toComputer->SendData("test envoi depuis rapsberry");
+	string received;
+	toComputer->ReadData(received);
+	cout << "received: " << received << endl;
+	/*Raspberry *raspberry = new Raspberry();
 	raspberry->StartListeningForComputerConnection();
-	//string received = raspberry->getReadingBufferComputerConnection();
 	raspberry->SendComputerConnection("test envoi depuis raspberry");
+	string received = raspberry->getReadingBufferComputerConnection();
+	cout << "received" << received << endl;*/
+
 }

@@ -3,26 +3,6 @@
   Validating architecture
   Starting remote build
   Compiling sources:
-  main.cpp
-  CommunicationManager.cpp
-C:\Users\cleme\source\repos\ProjetRaspberry\RaspberryPiSlave\CommunicationManager.cpp(10,29): warning : conversion to ‘uint16_t {aka short unsigned int}’ from ‘int’ may alter its value [-Wconversion]
-C:\Users\cleme\source\repos\ProjetRaspberry\RaspberryPiSlave\CommunicationManager.cpp(10,29): warning :   serv_addr.sin_port = htons(port);// convert portno from host byte order to network byte order
-C:\Users\cleme\source\repos\ProjetRaspberry\RaspberryPiSlave\CommunicationManager.cpp(10,29): warning :                              ^~~~
-C:\Users\cleme\source\repos\ProjetRaspberry\RaspberryPiSlave\CommunicationManager.cpp(13,52): warning : ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
-C:\Users\cleme\source\repos\ProjetRaspberry\RaspberryPiSlave\CommunicationManager.cpp(13,52): warning :    Error("Error occured on binding listening socket");
-C:\Users\cleme\source\repos\ProjetRaspberry\RaspberryPiSlave\CommunicationManager.cpp(13,52): warning :                                                     ^
-C:\Users\cleme\source\repos\ProjetRaspberry\RaspberryPiSlave\CommunicationManager.cpp(33,19): warning : converting to non-pointer type ‘int’ from NULL [-Wconversion-null]
-C:\Users\cleme\source\repos\ProjetRaspberry\RaspberryPiSlave\CommunicationManager.cpp(33,19): warning :   if (int socket = NULL)
-C:\Users\cleme\source\repos\ProjetRaspberry\RaspberryPiSlave\CommunicationManager.cpp(33,19): warning :                    ^~~~
-C:\Users\cleme\source\repos\ProjetRaspberry\RaspberryPiSlave\CommunicationManager.cpp(33,10): warning : unused variable ‘socket’ [-Wunused-variable]
-C:\Users\cleme\source\repos\ProjetRaspberry\RaspberryPiSlave\CommunicationManager.cpp(33,10): warning :   if (int socket = NULL)
-C:\Users\cleme\source\repos\ProjetRaspberry\RaspberryPiSlave\CommunicationManager.cpp(33,10): warning :           ^~~~~~
-C:\Users\cleme\source\repos\ProjetRaspberry\RaspberryPiSlave\CommunicationManager.cpp(52,22): warning : NULL used in arithmetic [-Wpointer-arith]
-C:\Users\cleme\source\repos\ProjetRaspberry\RaspberryPiSlave\CommunicationManager.cpp(52,22): warning :   if (socketStream == NULL){
-C:\Users\cleme\source\repos\ProjetRaspberry\RaspberryPiSlave\CommunicationManager.cpp(52,22): warning :                       ^~~~
-C:\Users\cleme\source\repos\ProjetRaspberry\RaspberryPiSlave\CommunicationManager.cpp(80,27): warning : ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
-C:\Users\cleme\source\repos\ProjetRaspberry\RaspberryPiSlave\CommunicationManager.cpp(80,27): warning :     Error("ERROR on accept");
-C:\Users\cleme\source\repos\ProjetRaspberry\RaspberryPiSlave\CommunicationManager.cpp(80,27): warning :                            ^
   Linking objects
   RaspberryPiSlave.vcxproj -> C:\Users\cleme\source\repos\ProjetRaspberry\RaspberryPiSlave\bin\ARM\Debug\RaspberryPiSlave.out
   Invoking 'gpio export 17 out', working directory: '/home/pi/projects/RaspberryPiSlave'

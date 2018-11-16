@@ -47,24 +47,26 @@ int CommunicationManager::SendData(string toBeSent)
 	return n;
 }
 
-int CommunicationManager::ReadData(char bufferReceived[] )
+int CommunicationManager::ReadData(string &buffer)
 {
+	char bufferReceived[DEFAULT_BUFLEN];
 	if (socketStream == NULL){
-		std::cerr << "Socket is null, failed to send data" << std::endl;
+		std::cerr << "Socket is null, failed to read data" << std::endl;
 		return 0;
 	}
-	int n=read(socketStream, bufferReceived, 40);
-	if (n < 0)
+	int nbrBitReceived=read(socketStream, bufferReceived, 40);
+	if (nbrBitReceived < 0)
 	{
 		Error(const_cast<char *>("ERROR reading from socket"));
 		return 0;
 	}
-	else if (n == 0) return 0;
+	else if (nbrBitReceived == 0) return 0;
 	else
 	{
 		//dataReceived
-		//buffer[n] = '\0';
-		std::cout << bufferReceived << std::endl;
+		bufferReceived[nbrBitReceived] = '\0';
+		buffer.assign(bufferReceived, nbrBitReceived);
+		//std::cout << bufferReceived << std::endl;
 		return 1;
 	}
 
