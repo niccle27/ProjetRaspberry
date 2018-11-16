@@ -28,6 +28,7 @@ void CommunicationManager::Error(char* msg)
 
 int CommunicationManager::SendData(string toBeSent)
 {
+	toBeSent.push_back('\0');
 	char *sendbuf = (char*)toBeSent.c_str();
 	if (int socket = NULL)
 	{

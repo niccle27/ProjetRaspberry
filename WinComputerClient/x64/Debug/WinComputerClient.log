@@ -1,6 +1,2 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Microsoft.CppClean.targets(76,5): warning : Access to the path 'c:\users\cleme\source\repos\projetraspberry\x64\debug\wincomputerclient.exe' is denied.
-  CommunicationManager.cpp
-  main.cpp
-  Source.cpp
-  Generating Code...
-LINK : fatal error LNK1104: cannot open file 'C:\Users\cleme\source\repos\ProjetRaspberry\x64\Debug\WinComputerClient.exe'
+﻿  CommunicationManager.cpp
+  WinComputerClient.vcxproj -> C:\Users\cleme\source\repos\ProjetRaspberry\x64\Debug\WinComputerClient.exe

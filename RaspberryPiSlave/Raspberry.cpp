@@ -16,7 +16,7 @@ std::string Raspberry::getReadingBufferComputerConnection()
 	return temp;
 }
 
-int Raspberry::SendReadingBufferComputerConnection(string bufferToSend)
+int Raspberry::SendComputerConnection(string bufferToSend)
 {
 	return communicationToComputer->SendData(bufferToSend);
 }

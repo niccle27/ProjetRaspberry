@@ -12,7 +12,7 @@ private:
 public:
 	int StartListeningForComputerConnection();
 	std::string getReadingBufferComputerConnection();
-	int SendReadingBufferComputerConnection(string bufferToSend);
+	int SendComputerConnection(string bufferToSend);
 public:
 	Raspberry();
 	~Raspberry();

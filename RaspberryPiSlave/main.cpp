@@ -11,9 +11,9 @@
 int main(void)
 {
 	wiringPiSetupSys();
-	std::cout << "version mise a jour 5" << std::endl;
+	std::cout << "version mise a jour 7" << std::endl;
 	Raspberry *raspberry = new Raspberry();
 	raspberry->StartListeningForComputerConnection();
-	string received = raspberry->getReadingBufferComputerConnection();
-	cout << received << endl;
+	//string received = raspberry->getReadingBufferComputerConnection();
+	raspberry->SendComputerConnection("test envoi depuis raspberry");
 }

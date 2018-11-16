@@ -2,7 +2,10 @@
 #include <ws2tcpip.h>
 #include <stdio.h>
 #include<iostream>
+#include <string>
 #include "CommunicationManager.h"
+
+using namespace std;
 
 #define DEFAULT_PORT "51717"
 #define DEFAULT_BUFLEN 32
@@ -10,12 +13,19 @@
 #pragma comment(lib, "Ws2_32.lib")
 
 int main() {
+	cout << "mise a jour 2" << endl;
 	CommunicationManager *toServer = new CommunicationManager();
 	toServer->InitialiseWinsock();
 	toServer->InitialiseServerAddr(AF_INET,51717, "192.168.1.11");
 	toServer->CreateSocket();
 	toServer->ConnectSocket();
-	toServer->Send("petit test de connection en objet");
+	string bufferReceived;
+	//toServer->Send("petit test de connection en objet");
+	int result = toServer->Receive(bufferReceived);
+	if (result > 0)
+	{
+		cout << bufferReceived << endl;
+	}
 	toServer->CloseSocketConnection();
 	delete toServer;
 	system("pause");

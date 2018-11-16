@@ -81,18 +81,32 @@ int CommunicationManager::CloseSocketConnection()
 	return 1;
 }
 
-int CommunicationManager::WaitAndReceive()
+int CommunicationManager::Receive(std::string &bufferReceived)
 {
 	int iResult;
-	do {
+	char recvbuf[DEFAULT_BUFLEN];
+	iResult = recv(mSocket, recvbuf, DEFAULT_BUFLEN, 0);
+	if (iResult > 0)
+	{
+		printf("Bytes received: %d\n", iResult);
+		bufferReceived.assign(recvbuf, iResult);
+	}
+	else if (iResult == 0)
+		printf("Connection closed\n");
+	else
+		printf("recv failed: %d\n", WSAGetLastError());
+	/*do {
 		iResult = recv(mSocket, recvbuf, DEFAULT_BUFLEN, 0);
 		if (iResult > 0)
+		{
 			printf("Bytes received: %d\n", iResult);
+			bufferReceived.assign(recvbuf, strlen(recvbuf));
+		}
 		else if (iResult == 0)
 			printf("Connection closed\n");
 		else
 			printf("recv failed: %d\n", WSAGetLastError());
-	} while (iResult > 0);
+	} while (iResult > 0);*/
 	return iResult;
 }
 

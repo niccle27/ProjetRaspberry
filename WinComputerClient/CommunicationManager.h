@@ -14,7 +14,6 @@ class CommunicationManager
 private:
 	WSADATA wsaData;
 	SOCKET mSocket = INVALID_SOCKET;
-	char recvbuf[DEFAULT_BUFLEN];
 	SOCKADDR_IN  ServerAddr;
 public:
 	int InitialiseWinsock();
@@ -23,7 +22,7 @@ public:
 	int ConnectSocket();
 	int Send(std::string toBeSent);
 	int CloseSocketConnection();
-	int WaitAndReceive();
+	int Receive(std::string &bufferReceived);
 
 
 public:
