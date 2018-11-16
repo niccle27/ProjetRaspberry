@@ -3,6 +3,7 @@
   Validating architecture
   Starting remote build
   Compiling sources:
+  main.cpp
   Linking objects
   RaspberryPiSlave.vcxproj -> C:\Users\cleme\source\repos\ProjetRaspberry\RaspberryPiSlave\bin\ARM\Debug\RaspberryPiSlave.out
   Invoking 'gpio export 17 out', working directory: '/home/pi/projects/RaspberryPiSlave'

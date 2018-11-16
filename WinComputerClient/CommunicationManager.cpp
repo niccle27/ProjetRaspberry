@@ -57,12 +57,24 @@ int CommunicationManager::CreateNonBlockingSocket()
 
 }
 
+bool CommunicationManager::IsSocketWritable()
+{
+	FD_SET writeSet;
+	timeval timer;
+	timer.tv_sec = 1;
+
+	FD_ZERO(&writeSet);
+	FD_SET(mSocket, &writeSet);
+	select(0, nullptr, &writeSet, nullptr, &timer);
+	return FD_ISSET(mSocket,&writeSet) != 0;
+}
+
 int CommunicationManager::ConnectSocket()
 {
 	int iResult = connect(mSocket, reinterpret_cast<SOCKADDR *>(&ServerAddr), sizeof(ServerAddr));
 	if (iResult == SOCKET_ERROR) {
-		closesocket(mSocket);
-		mSocket = INVALID_SOCKET;
+		//closesocket(mSocket);
+		//mSocket = INVALID_SOCKET;
 		return 0;
 	}
 	return 1;
@@ -110,18 +122,6 @@ int CommunicationManager::Receive(std::string &bufferReceived)
 		printf("Connection closed\n");
 	else
 		printf("recv failed: %d\n", WSAGetLastError());
-	/*do {
-		iResult = recv(mSocket, recvbuf, DEFAULT_BUFLEN, 0);
-		if (iResult > 0)
-		{
-			printf("Bytes received: %d\n", iResult);
-			bufferReceived.assign(recvbuf, strlen(recvbuf));
-		}
-		else if (iResult == 0)
-			printf("Connection closed\n");
-		else
-			printf("recv failed: %d\n", WSAGetLastError());
-	} while (iResult > 0);*/
 	return iResult;
 }
 

@@ -14,14 +14,10 @@ int main(void)
 	std::cout << "version mise a jour 10" << std::endl;
 	CommunicationManager *toComputer = new CommunicationManager();
 	toComputer->StartListeningForConnection();
+	string toWait;
+	cin >> toWait;
 	toComputer->SendData("test envoi depuis rapsberry");
 	string received;
 	toComputer->ReadData(received);
 	cout << "received: " << received << endl;
-	/*Raspberry *raspberry = new Raspberry();
-	raspberry->StartListeningForComputerConnection();
-	raspberry->SendComputerConnection("test envoi depuis raspberry");
-	string received = raspberry->getReadingBufferComputerConnection();
-	cout << "received" << received << endl;*/
-
 }
